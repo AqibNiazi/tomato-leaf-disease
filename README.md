@@ -53,7 +53,7 @@ A structured three-phase training strategy where the ResNet50 backbone is first 
 
 | Service | URL |
 |---|---|
-| 🖥️ Frontend (Vercel) | [https://tomato-ai.vercel.app](https://tomato-ai.vercel.app) |
+| 🖥️ Frontend (Vercel) | [https://tomato-ai-iota.vercel.app/](https://tomato-ai-iota.vercel.app/) |
 | ⚙️ Backend API (HF Spaces) | [https://aqibniazi-tomato-disease-api.hf.space](https://aqibniazi-tomato-disease-api.hf.space) |
 | 📓 Training Notebook (Kaggle) | [https://www.kaggle.com/code/maqibniazi/tomato-leaf-disease](https://www.kaggle.com/code/maqibniazi/tomato-leaf-disease) |
 
