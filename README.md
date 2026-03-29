@@ -20,7 +20,6 @@
 
 </div>
 
----
 
 ## Table of Contents
 
@@ -39,7 +38,6 @@
 - [Citation](#citation)
 - [License](#license)
 
----
 
 ## Overview
 
@@ -51,17 +49,13 @@ The platform covers the complete machine learning lifecycle — from dataset ana
 
 A structured three-phase training strategy where the ResNet50 backbone is first frozen to train only the classification head, then the entire network is unfrozen for fine-tuning at a reduced learning rate. This prevents catastrophic forgetting of ImageNet features while allowing the model to adapt its representations to the specific visual textures of plant disease. A robust image validation layer that checks both browser-reported MIME type and actual file magic bytes, rejecting spoofed uploads before they reach the model. A modular Flask architecture organized into blueprints, services, and utilities rather than a monolithic script, making the codebase maintainable and straightforward to extend with new endpoints. A Zustand-powered React frontend with a full inference state machine covering uploading, scanning animation, result rendering, and persistent scan history via localStorage.
 
----
-
 ## Live Demo
 
 | Service | URL |
 |---|---|
-| Frontend (Vercel) | *Add your Vercel URL after deployment* |
-| Backend API (Hugging Face Spaces) | *Add your HF Space URL after deployment* |
-| Training Notebook (Kaggle) | *Add your Kaggle notebook link* |
-
----
+| 🖥️ Frontend (Vercel) | [https://tomato-ai.vercel.app](https://tomato-ai.vercel.app) |
+| ⚙️ Backend API (HF Spaces) | [https://aqibniazi-tomato-disease-api.hf.space](https://aqibniazi-tomato-disease-api.hf.space) |
+| 📓 Training Notebook (Kaggle) | [https://www.kaggle.com/code/maqibniazi/tomato-leaf-disease](https://www.kaggle.com/code/maqibniazi/tomato-leaf-disease) |
 
 ## Research Motivation
 
@@ -70,8 +64,6 @@ Tomato is one of the most economically important crops globally, yet annual yiel
 Most published systems report aggregate accuracy on clean, controlled benchmark images without addressing the practical deployment challenges of variable field photography, mixed-extension image uploads, and integration with a frontend that non-specialists can actually use. Transfer learning from ImageNet to plant pathology is well-motivated but the specific fine-tuning strategy — how many layers to freeze, for how long, and at what learning rate — varies significantly across studies without systematic comparison. End-to-end deployable open-source implementations that include both the training notebook and the production inference stack in a single repository are rare.
 
 This project addresses these gaps by documenting every engineering decision from preprocessing through deployment and providing a fully reproducible training pipeline alongside the running application.
-
----
 
 ## System Architecture
 
@@ -110,8 +102,6 @@ This project addresses these gaps by documenting every engineering decision from
 
 A request to `/api/predict` follows this path: the React frontend sends a multipart form upload, Flask validates the image at both MIME and magic-byte levels, the service layer preprocesses the PIL image with ImageNet-standard normalization, ResNet50 runs a forward pass and returns a probability distribution via softmax, and the top-K predictions are returned as a ranked JSON list with human-readable labels and confidence scores.
 
----
-
 ## Dataset
 
 | Property | Details |
@@ -129,7 +119,6 @@ The dataset contains controlled laboratory photographs of tomato leaves across t
 
 Training images are resized to 224×224 and subjected to random horizontal flips, vertical flips, 20-degree rotations, color jitter, and random affine translations to improve generalization. Validation images receive only deterministic resizing and normalization. All pixel values are normalized using ImageNet statistics (mean [0.485, 0.456, 0.406], standard deviation [0.229, 0.224, 0.225]) because the ResNet50 backbone was trained under these statistics.
 
----
 
 ## Model and Training Pipeline
 
@@ -153,7 +142,6 @@ The training proceeds in two phases. In the first phase the backbone is complete
 
 ResNet50 was selected over deeper alternatives (ResNet101, EfficientNet-B4) because the PlantVillage dataset is a medium-scale benchmark where marginal accuracy gains from deeper architectures are outweighed by the significantly longer training time and larger model size. The 50-layer residual network provides sufficient representational capacity for the texture and color features that characterize leaf diseases while remaining deployable on Hugging Face Spaces free-tier CPU infrastructure with acceptable inference latency.
 
----
 
 ## Model Performance
 
@@ -167,7 +155,6 @@ The gap between the baseline CNN and transfer learning reflects the fundamental 
 
 Per-class performance varies. The healthy class and clearly distinct diseases such as Late blight and Yellow Leaf Curl Virus consistently achieve F1 scores above 0.97. Visually similar diseases such as Bacterial spot and Septoria leaf spot show more confusion due to overlapping symptom appearances, which is consistent with the difficulty human agronomists report in distinguishing these conditions from photographs alone.
 
----
 
 ## Screenshots
 
@@ -195,7 +182,6 @@ Per-class performance varies. The healthy class and clearly distinct diseases su
 
 ![Classes](screenshots/classes.png)
 
----
 
 ## Project Structure
 
@@ -262,8 +248,6 @@ tomato-leaf-disease-detection/
     └── package.json
 ```
 
----
-
 ## Installation and Setup
 
 ### Prerequisites
@@ -315,7 +299,6 @@ npm run dev
 4. Run all cells in sequence
 5. Download `tomato_disease_resnet50.pth` and `class_metadata.json` from `/kaggle/working/`
 
----
 
 ## API Reference
 
@@ -397,8 +380,6 @@ Field: image (file)
 }
 ```
 
----
-
 ## Technology Stack
 
 | Layer | Technology | Version | Purpose |
@@ -424,20 +405,18 @@ Field: image (file)
 | Deployment | Vercel | — | Frontend hosting |
 | Training | Kaggle (GPU T4) | — | Notebook compute environment |
 
----
-
 ## Citation
 
 If you reference this project in your research, please cite it as:
 
 ```bibtex
 @software{author2026tomatoai,
-  author    = {Your Name},
+  author    = {Muhammad Aqib Javed},
   title     = {TomatoAI: An End-to-End Deep Learning Platform for
                Automated Tomato Leaf Disease Detection Using
                Transfer Learning},
   year      = {2026},
-  url       = {https://github.com/YOUR_USERNAME/tomato-leaf-disease-detection},
+  url       = {https://github.com/AqibNiazi/tomato-leaf-disease-detection},
   note      = {Software available at GitHub}
 }
 ```
@@ -450,7 +429,6 @@ Mohanty, S. P., Hughes, D. P., & Salathé, M. (2016). Using deep learning for im
 
 Hughes, D. P., & Salathé, M. (2015). An open access repository of images on plant health to enable the development of mobile disease diagnostics. *arXiv preprint arXiv:1511.08060*.
 
----
 
 ## License
 
@@ -458,11 +436,10 @@ This project is licensed under the **MIT License** — see the [LICENSE](LICENSE
 
 The PlantVillage dataset is subject to the Creative Commons Attribution 4.0 International license. This software should not be used as the sole basis for crop disease management without validation by a qualified agronomist.
 
----
 
 <div align="center">
 
-Built by **Your Name** · Your University
+Built by **Muhammad Aqib Javed** · UET TAXILA
 
 *If this project helped your research, please consider giving it a ⭐*
 
